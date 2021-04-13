@@ -18,8 +18,7 @@
         android:layout_marginBottom="8dp">
     </ImageView>
 
-
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,6 +27,5 @@
         tools:layout_marginTop="17dp"
         tools:layout_marginRight="28dp"
         tools:layout_marginBottom="30dp"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

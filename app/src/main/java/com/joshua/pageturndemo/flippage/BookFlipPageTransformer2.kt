@@ -1,35 +1,9 @@
-/*
-Copyright 2020 Wajahat Karim
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 package com.joshua.pageturndemo.flippage
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 
-/**
- * A book based page flip animation PageTransformer implementation for ViewPager2
- *
- * Set the object of this transformer to any ViewPager object.
- * For example, myViewPager.setPageTransformer(true, new BookFlipPageTransformer2());
- *
- * @see [EasyFlipViewPager](http://github.com/wajahatkarim3/EasyFlipViewPager)
- *
- *
- * @author Wajahat Karim (http://wajahatkarim.com)
- */
 class BookFlipPageTransformer2 : ViewPager2.PageTransformer {
 
     companion object{
@@ -37,7 +11,6 @@ class BookFlipPageTransformer2 : ViewPager2.PageTransformer {
         const val RIGHT = 1
         const val CENTER = 0
     }
-
 
     //region Getters/Setters
     var scaleAmountPercent = 5f

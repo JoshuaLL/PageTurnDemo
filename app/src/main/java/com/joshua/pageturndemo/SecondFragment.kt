@@ -4,63 +4,54 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.PagerAdapter
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.joshua.pageturndemo.databinding.FragmentSecondBinding
-import com.joshua.pageturndemo.flippage.BookFlipPageTransformer
+import com.joshua.pageturndemo.flippage.BookFlipPageTransformer2
 
 class SecondFragment: Fragment(R.layout.fragment_second) {
 
+    private val viewModel:SecondViewModel by viewModels()
+
     lateinit var binding: FragmentSecondBinding
-    private var mPagerAdapter: PagerAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentSecondBinding.bind(view)
-        binding.pager.let { pager->
-            mPagerAdapter = BookPagerAdapter(requireActivity().supportFragmentManager)
-            pager.adapter = mPagerAdapter
-            pager.clipToPadding = true
-            pager.setPageTransformer(true, BookFlipPageTransformer())
+
+        viewModel.pageFragments.observe(viewLifecycleOwner){
+            it?.let {
+                val mPagerAdapter = BookPagerAdapter(
+                    it,
+                    requireActivity().supportFragmentManager,
+                    lifecycle
+                )
+                binding.pager.let { pager->
+                    pager.adapter = mPagerAdapter
+                    pager.clipToPadding = true
+                    pager.setPageTransformer(BookFlipPageTransformer2())
+                }
+            }
         }
 
+        viewModel.setUpData()
     }
 
-    class BookPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
-    {
-        var fragments = arrayListOf<BookPageIntroFragment>()
-        init {
-            val titles =
-                arrayOf("All About Reading", "Find Your Love", "Pick Your Books", "Enjoy Your Time")
-            val subtitles = arrayOf(
-                "Everyone love reading books",
-                "All books in your library",
-                "Books are your best friends",
-                "All set and get started now"
-            )
-            val imageIds = intArrayOf(
-                R.drawable.all_about_reading,
-                R.drawable.find_your_love,
-                R.drawable.pick_your_books,
-                R.drawable.enjoy_your_time
-            )
-            titles.forEachIndexed { index, s ->
-                var frag = BookPageIntroFragment.newInstance(titles[index], subtitles[index], imageIds[index])
-                fragments.add(frag)
-            }
+}
 
-            for (i in 0..3) {
+class BookPagerAdapter(
+    private val pageFragmentsCreators: MutableMap<Int, Fragment>,
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle
+) : FragmentStateAdapter(fragmentManager, lifecycle)
+{
+    override fun getItemCount(): Int {
+        return pageFragmentsCreators.size
+    }
 
-            }
-
-        }
-        override fun getItem(position: Int): Fragment {
-            return fragments[position]
-        }
-
-        override fun getCount(): Int {
-            return fragments.size
-        }
+    override fun createFragment(position: Int): Fragment {
+        return pageFragmentsCreators[position] ?: throw IndexOutOfBoundsException()
     }
 }

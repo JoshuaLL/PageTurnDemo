@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.joshua.pageturndemo.databinding.FragmentBookPageLayoutBinding
 
 class BookPageIntroFragment : Fragment(R.layout.fragment_book_page_layout) {
@@ -43,7 +44,8 @@ class BookPageIntroFragment : Fragment(R.layout.fragment_book_page_layout) {
         binding.let {
             it.textView2.text = title
             it.textView3.text = subtitle
-            it.imageView.setImageResource(imageId)
+
+            Glide.with(view).load(imageId).into(it.imageView)
             if (imageId == R.drawable.all_about_reading) binding.root.tag = 21 else binding.root.tag = 40
         }
     }
