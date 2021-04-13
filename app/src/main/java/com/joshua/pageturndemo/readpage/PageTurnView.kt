@@ -1,4 +1,4 @@
-package com.joshua.pageturndemo.readwidget
+package com.joshua.pageturndemo.readpage
 
 import android.content.Context
 import android.graphics.*
@@ -7,8 +7,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.Scroller
-import com.joshua.pageturndemo.readwidget.computer.DefaultPointComputer
-import com.joshua.pageturndemo.readwidget.computer.PointComputer
+import com.joshua.pageturndemo.readpage.vo.DefaultPointComputer
+import com.joshua.pageturndemo.readpage.vo.PointComputer
 
 class PageTurnView : View {
 
@@ -71,7 +71,7 @@ class PageTurnView : View {
             canvas.drawColor(-0x1000000)
         } else {
             canvas.save()
-            canvas.drawColor(-0x10000)
+            canvas.drawColor(-0x104020)
             mPageTurnAdapter!!.onDraw(mCurrentPosition, canvas)
             canvas.restore()
 
@@ -117,11 +117,11 @@ class PageTurnView : View {
                     canvas.clipPath(path1)
 
                     canvas.save()
-                    canvas.drawColor(-0xff0100)
+                    canvas.drawColor(-0x6c6c6c)
                     mPageTurnAdapter!!.onDraw(mCurrentPosition + 1, canvas)
                     canvas.restore()
                     canvas.clipPath(path2)
-                    canvas.drawColor(-0xffff01)
+                    canvas.drawColor(-0x343434)
 
                 }
             }
@@ -256,11 +256,9 @@ class PageTurnView : View {
                 a = mLastA
                 invalidate()
             } else {
-                // 动画执行完毕
                 endPageAnim()
             }
         } else {
-            // 并没有动画开始
         }
     }
 

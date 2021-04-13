@@ -1,4 +1,4 @@
-package com.joshua.pageturndemo.readwidget.computer
+package com.joshua.pageturndemo.readpage.vo
 
 import android.graphics.Point
 import android.util.Log

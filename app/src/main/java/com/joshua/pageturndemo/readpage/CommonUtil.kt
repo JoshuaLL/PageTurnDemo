@@ -1,4 +1,4 @@
-package com.joshua.pageturndemo.readwidget
+package com.joshua.pageturndemo.readpage
 
 import android.content.Context
 import android.graphics.Point

@@ -2,11 +2,9 @@ package com.joshua.pageturndemo
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.joshua.pageturndemo.databinding.FragmentFirstBinding
-import com.joshua.pageturndemo.readwidget.PageTurnView
-import com.joshua.pageturndemo.readwidget.TextPageAdapter
+import com.joshua.pageturndemo.readpage.TextPageAdapter
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
 
